@@ -35,10 +35,10 @@ void SlowPWM::update() {
       _end  = _start + _duty_cycle;
       if (_start == 0) {_start = _now;}
     }
-    if (_now >= _start && _now <= _high && !_active) {
+    if (BETWEEN(_now, _start, _high) && !_active) { // _now >= _start && _now <= _high
       digitalWrite(_output, HIGH);
       _active = true;
-    } else if (_now > _high && _now < _end && _active) {
+    } else if (BETWEEN(_now, _high, _end) && _active) { // _now > _high && _now < _end
       digitalWrite(_output, LOW);
       _active = false;
     } else if (_now >= _end) {
