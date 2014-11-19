@@ -1,5 +1,5 @@
 /*
-  SlowPWM - v1.0 - 14/11/2014
+  SlowPWM - v1.0 - 19/11/2014
   Arduino library for low frequency PWM.
   Created by William Koch.
   Released into the public domain.
