@@ -10,12 +10,23 @@ Include the library in your sketch:
 
     #include <SlowPWM.h>
 
-### Constructor
+### Constructors
 
-This will create a SlowPWM object with a custom duty-cycle:
+There are 2 constructors which differ by analog resolution.
+
+#### Default
+
+This will create a SlowPWM object with a custom duty-cycle and 10bit analog resolution:
 
     SlowPWM myPWM(1000, A1, 10);
     // 1000ms duty-cycle, input pin: A1, output pin: 10
+
+#### 12bits Analog Resolution
+
+The same as above, but with 12 bits analog resolution:
+
+    SlowPWM myPWM(1000, A1, 10, 12);
+    // 1000ms duty-cycle, input pin: A1, output pin: 10, 12bits.
 
 ### Functions
 

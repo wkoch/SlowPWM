@@ -18,6 +18,18 @@ SlowPWM::SlowPWM(unsigned long duty_cycle, byte input, byte output) {
   _output = output;
   _start = 0;
   _status = _active = false;
+  _res = 1023;
+}
+
+SlowPWM::SlowPWM(unsigned long duty_cycle, byte input, byte output, byte bits) {
+  pinMode(input, INPUT);
+  pinMode(output, OUTPUT);
+  _duty_cycle = duty_cycle;
+  _input = input;
+  _output = output;
+  _start = 0;
+  _status = _active = false;
+  bits == 12 ? _res = 4095 : _res = 1023;
 }
 
 void SlowPWM::on() {
@@ -31,7 +43,7 @@ void SlowPWM::update() {
   _now = millis();
   if (_status) {
     if (_start >= _end || _start == 0) {
-      _high = _start + map(analogRead(_input), 0, 1023, 0, _duty_cycle);
+      _high = _start + map(analogRead(_input), 0, _res, 0, _duty_cycle);
       _end  = _start + _duty_cycle;
       if (_start == 0) {_start = _now;}
     }
