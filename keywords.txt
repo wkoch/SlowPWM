@@ -1,0 +1,9 @@
+# Datatypes
+
+SlowPWM  KEYWORD1
+
+# Methods and Functions
+
+on       KEYWORD2
+off      KEYWORD2
+update   KEYWORD2
