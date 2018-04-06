@@ -1,8 +1,8 @@
 # SlowPWM
 
-Arduino library for low frequency PWM, 1 example included.
+Extended Arduino library by William Koch for low frequency PWM with analog pin or a variable as input, 2 example included.
 
-**Tested on an Arduino Due only.**
+**Tested on an Arduino Due & Uno R3.**
 
 ## Instructions
 
@@ -12,7 +12,7 @@ Include the library in your sketch:
 
 ### Constructors
 
-There are 2 constructors which differ by analog resolution.
+There are 2 constructors which differ by analog resolution and an aditional one for a integer variable as control signal.
 
 #### Default
 
@@ -27,6 +27,14 @@ The same as above, but with 12 bits analog resolution:
 
     SlowPWM myPWM(1000, A1, 10, 12);
     // 1000ms duty-cycle, input pin: A1, output pin: 10, 12bits.
+	
+#### 8bit integer variable Resolution
+
+This will create a SlowPWM object with a custom duty-cycle and 8bit resolution controlled by an integer variable:
+
+	int inputPWM;
+    SlowPWM myPWM(1000, &inputPWM, 10);
+    // 1000ms duty-cycle, input variable: inputPWM, output pin: 10.
 
 ### Functions
 

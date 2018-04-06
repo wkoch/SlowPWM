@@ -13,6 +13,7 @@
 class SlowPWM {
   public:
     SlowPWM(unsigned long duty_cycle, byte input, byte output);
+    SlowPWM(unsigned long duty_cycle, int* input, byte output);
     SlowPWM(unsigned long duty_cycle, byte input, byte output, byte bits);
 
     void on();
@@ -21,7 +22,8 @@ class SlowPWM {
   private:
     unsigned long _duty_cycle, _start, _high, _end, _now;
     int _res;
-    byte _input, _output;
+	  int *_inputInt;
+    byte _inputPin, _output;
     boolean _status, _active;
 };
 
