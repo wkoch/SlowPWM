@@ -84,3 +84,9 @@ void SlowPWM::off() {
     digitalWrite(_output, LOW);
   }
 }
+
+void SlowPWM::setDutyCycle(unsigned long dC) {
+  if (dC > 0) {
+    _duty_cycle = dC;
+    }
+}

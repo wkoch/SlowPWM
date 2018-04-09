@@ -19,8 +19,9 @@ class SlowPWM {
     void on();
     void off();
     void update();
+    void setDutyCycle(unsigned long);
   private:
-    unsigned long _duty_cycle, _start, _high, _end, _now;
+    unsigned long _duty_cycle, _start, _high, _end, _now, dC;
     int _res;
 	  int *_inputInt;
     byte _inputPin, _output;
