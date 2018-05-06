@@ -14,22 +14,35 @@ SlowPWM::SlowPWM(unsigned long duty_cycle, byte input, byte output) {
   pinMode(input, INPUT);
   pinMode(output, OUTPUT);
   _duty_cycle = duty_cycle;
-  _input = input;
+  _inputPin = input;
   _output = output;
   _start = 0;
   _status = _active = false;
   _res = 1023;
+  bool _inputPin = true;
+}
+
+SlowPWM::SlowPWM(unsigned long duty_cycle, int* input, byte output) {
+  pinMode(output, OUTPUT);
+  _duty_cycle = duty_cycle;
+  _inputInt = input;
+  _output = output;
+  _start = 0;
+  _status = _active = false;
+  _res = 1023;
+  bool _inputPin = false;
 }
 
 SlowPWM::SlowPWM(unsigned long duty_cycle, byte input, byte output, byte bits) {
   pinMode(input, INPUT);
   pinMode(output, OUTPUT);
   _duty_cycle = duty_cycle;
-  _input = input;
+  _inputPin = input;
   _output = output;
   _start = 0;
   _status = _active = false;
   bits == 12 ? _res = 4095 : _res = 1023;
+  bool _inputPin = true;
 }
 
 void SlowPWM::on() {
@@ -43,7 +56,13 @@ void SlowPWM::update() {
   _now = millis();
   if (_status) {
     if (_start >= _end || _start == 0) {
-      _high = _start + map(analogRead(_input), 0, _res, 0, _duty_cycle);
+	  if (_inputPin) {
+      _high = _start + map(analogRead(_inputPin), 0, _res, 0, _duty_cycle);
+	  }
+	  else {
+		  int input = *_inputInt;
+		  _high = _start + map(input, 0, 255, 0, _duty_cycle);
+	  }
       _end  = _start + _duty_cycle;
       if (_start == 0) {_start = _now;}
     }
@@ -64,4 +83,10 @@ void SlowPWM::off() {
     _status = false;
     digitalWrite(_output, LOW);
   }
+}
+
+void SlowPWM::setDutyCycle(unsigned long dC) {
+  if (dC > 0) {
+    _duty_cycle = dC;
+    }
 }
